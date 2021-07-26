@@ -16,6 +16,8 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     flexDirection: "row",
+    flexWrap: "wrap",
     marginHorizontal: 5,
+    marginBottom: 10,
   },
 });
