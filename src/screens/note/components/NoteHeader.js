@@ -19,6 +19,7 @@ export const NoteHeader = ({ text }) => {
 const styles = StyleSheet.create({
   container: {
     fontWeight: "bold",
-    color: colors.text
+    fontSize: 24,
+    color: colors.text,
   },
 });
