@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useRef } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,6 +8,7 @@ import {
 import { colors } from "../../../styleConfig";
 
 export const Phrase = ({ data }) => {
+  const inputRef = useRef(null);
   const { preferIndex, values, customValue } = data;
   const [currentIndex, setCurrentIndex] = useState(preferIndex || 0);
   const [isInput, setIsInput] = useState(false);
@@ -22,7 +23,8 @@ export const Phrase = ({ data }) => {
 
   const enableInput = useCallback(() => {
     if (!customValue) setIsInput(true);
-  }, []);
+    inputRef.current.focus()
+  }, [inputRef, customValue]);
 
   const disableInput = useCallback(() => {
     setIsInput(false);
@@ -35,13 +37,14 @@ export const Phrase = ({ data }) => {
       onLongPress={enableInput}
     >
       {!isInput ? (
-        <Text style={{...styles.phrase, ...styles.text}}>{value}</Text>
+        <Text style={styles.text}>{value}</Text>
       ) : (
         <TextInput
+          ref={inputRef}
           value={value}
           onChangeText={setValue}
           blurOnSubmit
-          style={styles.text}
+          style={{...styles.text, ...styles.input}}
           onBlur={disableInput}
         />
       )}
@@ -51,13 +54,23 @@ export const Phrase = ({ data }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
+    flex: 1,
+    backgroundColor: colors.background,
     display: "flex",
-  },
-  phrase: {
-    marginHorizontal: 3
+
+    borderWidth: 1,
+    borderColor: colors.dark,
   },
   text: {
-    color: colors.text
+    color: colors.text,
+    fontSize: 16,
+    marginHorizontal: 2,
+    height: 20,
+    textAlign: "center",
+  },
+  input: {
+    transform: [
+      {translateY: 1}
+    ]
   }
 });
