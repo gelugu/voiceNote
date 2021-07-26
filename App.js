@@ -5,6 +5,7 @@ import { MenuNotes } from "./src/Menu/MenuNotes";
 import { colors } from "./src/styleConfig";
 import { Note } from "./src/screens/note";
 import { User } from "./src/screens/user";
+import { Sandbox } from "./src/Sandbox";
 
 const profileScreenId = "profileScreenId";
 
@@ -29,6 +30,16 @@ const notes = [
           },
           {
             id: "ewfd rnlg;lf",
+            customValue: "",
+            values: [
+              "to show app purpose",
+              "to show application purpose",
+              "to snow app purpose",
+            ],
+            preferIndex: 2,
+          },
+          {
+            id: "ghju876trfg",
             customValue: "",
             values: [
               "to show app purpose",
@@ -77,6 +88,8 @@ const notes = [
   },
 ];
 
+const DEBUG = false;
+
 export default function App() {
   const [screenId, setScreenId] = useState(notes[0].id);
   const [currentNoteId, setCurrentNoteId] = useState(notes[0].id);
@@ -85,6 +98,8 @@ export default function App() {
     if (screenId === profileScreenId) setScreenId(currentNoteId);
     else setScreenId(profileScreenId);
   }, [screenId, currentNoteId, profileScreenId]);
+
+  if (DEBUG) return <Sandbox />
 
   return (
     <View style={styles.container}>
